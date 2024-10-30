@@ -34,7 +34,7 @@ Self-SSGI is a multimodal self-supervised learning model that integrates protein
 - Run train.py to train the model, and the input data for this part requires that features from different modalities are unified to a dimension of 128.
 
 ## Acknowledgments
-The authors would like to thank the researchers who shared the codes and software (ESM2, DeepLoc2, GearNet, Foldseek, DeepFRI, FoldExplorer, mini3di, Contrastive Language-Image Pre-Training, Visual Integrity Detector) used in this study. 
-This project utilizes features from the mini3di library for obtaining Foldseek features. We would like to thank the authors of mini3di for their contributions. 
-The mini3di code is licensed under the BSD 3-Clause License. More information about mini3di can be found at [mini3di](https://github.com/althonos/mini3di)
+- The authors would like to thank the researchers who shared the codes and software (ESM2, DeepLoc2, GearNet, Foldseek, DeepFRI, FoldExplorer, mini3di, Contrastive Language-Image Pre-Training, Visual Integrity Detector) used in this study. 
+- This project utilizes features from the mini3di library for obtaining Foldseek features. We would like to thank the authors of mini3di for their contributions. 
+- The mini3di code is licensed under the BSD 3-Clause License. More information about mini3di can be found at [mini3di](https://github.com/althonos/mini3di)
 
