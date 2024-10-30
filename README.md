@@ -5,7 +5,7 @@ Self-SSGI is a multimodal self-supervised learning model that integrates protein
 
 ### 1. Protein Atom-Level Feature Extraction:
 - Input PDB files and run `Process_Seq_Struc_data.m` to obtain amino acid types and dihedral features.
-- Use [mini3di]([https://huggingface.co/Maureen123/Self-SSGI/blob/main/Self-SSGI_best_pretrained_seq_struc_model.pkl](https://github.com/althonos/mini3di)) to obtain Foldseek features.
+- Use [mini3di](https://github.com/althonos/mini3di) to obtain Foldseek features.
 
 #### Feature Order:
 - **1-10**: Foldseek features.
