@@ -31,4 +31,9 @@ Self-SSGI is a multimodal self-supervised learning model that integrates protein
 - Run load_model_and_get_fea.py to  load our pre-trained model and extract the features of the image. You can download the pre-trained model at [Pretrained Image Model](https://huggingface.co/Maureen123/Self-SSGI/blob/main/Self-SSGI_Pretrained%20Image%20Model.pkl)
   
 ## Multimodal data fusion
-- Run train.py to train the model, and the input data for this part requires that features from different modalities are unified to a dimension of 128. 
+- Run train.py to train the model, and the input data for this part requires that features from different modalities are unified to a dimension of 128.
+
+## Acknowledgments
+This project utilizes features from the mini3di library for obtaining Foldseek features. We would like to thank the authors of mini3di for their contributions. 
+The mini3di code is licensed under the BSD 3-Clause License. More information about mini3di can be found at [mini3di](https://github.com/althonos/mini3di)
+
