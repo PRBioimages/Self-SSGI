@@ -28,8 +28,6 @@ class MyIterableDataset(IterableDataset):
         images = data['final_fea']
 
 
-
-        ##还是先要判断是验证集还是训练集
         keyword1 = "train"
         keyword2 = "valid"
         keyword3 = "test"
@@ -78,13 +76,12 @@ class MyIterableDataset(IterableDataset):
         return images,seq, label,go
 
     def __iter__(self):
-        # 在迭代器内部对数据进行随机打乱
         shuffled_indices = torch.randperm(len(self.file_list))
         shuffled_files = [self.file_list[i] for i in shuffled_indices]
 
         for file in shuffled_files:
             images,seq, label,go = self.parse_file(file)
-            yield images,seq, label ,go # 返回特征和标签
+            yield images,seq, label ,go
 
     def __len__(self):
         return len(self.file_list)
