@@ -81,7 +81,7 @@ def main(img_dir,save_dir):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     all_file_list = glob.glob(os.path.join(img_dir, "*.jpg"))
 
-    model_path=''
+    model_path='pretrained model path'
     base_model = CELLResNet50(pretrained=False, model_name='Cell_resnet50d')
     model_test = ExtendedCELLResNet50(base_model, mlp_hidden_dim=128, out_dim=10).to(device)
     checkpoint = torch.load(model_path)
