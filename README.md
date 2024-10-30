@@ -9,7 +9,7 @@ Self-SSGI is a multimodal self-supervised learning model that integrates protein
 
 #### Feature Order:
 - **1-10**: Foldseek features.
-- **11-12**: Dihedral angles(φ (phi): φ and ψ (psi): ψ).
+- **11-12**: Dihedral angles(φ, ψ).
 - **13-15**: The X, Y, and Z coordinates of the alpha carbon (CA) atoms of the amino acids.
 - **16-35**: One-hot encoding of amino acid types.
 
