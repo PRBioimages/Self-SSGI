@@ -5,7 +5,7 @@ Self-SSGI is a multimodal self-supervised learning model that integrates protein
 
 ### 1. Protein Atom-Level Feature Extraction:
 - Input PDB files and run `Process_Seq_Struc_data.m` to obtain amino acid types and dihedral features.
-- Use [mini3di]([https://www.baidu.com/](https://github.com/althonos/mini3di))  to obtain Foldseek features.
+- Use [mini3di]([https://huggingface.co/Maureen123/Self-SSGI/blob/main/Self-SSGI_best_pretrained_seq_struc_model.pkl](https://github.com/althonos/mini3di)) to obtain Foldseek features.
 
 #### Feature Order:
 - **1-10**: Foldseek features.
@@ -26,10 +26,9 @@ Self-SSGI is a multimodal self-supervised learning model that integrates protein
 - The example is already in the Image_Data folder.
   
 ## Self-supervised model for joint representation learning of protein sequence and structure based on mask training
-- Run train.py to train the model. You can download the pre-trained model at [Pretrained Sequence_Structure Model](https://huggingface.co/Maureen123/Self-SSGI/blob/main/Self-SSGI_best_pretrained_seq_struc_model.pkl)
-
+- Run train.py to train the model. You can download the pre-trained model at [Pretrained Sequence_Structure Model](https://huggingface.co/Maureen123/Self-SSGI/blob/main/Self-SSGI_Pretrained%20Sequence_Structure%20Model.pkl)
 ## Contrastive Image-GO Pre-training
-- Run load_model_and_get_fea.py to  load our pre-trained model and extract the features of the image. You can download the pre-trained model at [Pretrained Image Model](https://huggingface.co/Maureen123/Self-SSGI/blob/main/Self-SSGI_best_image_model.pkl)
+- Run load_model_and_get_fea.py to  load our pre-trained model and extract the features of the image. You can download the pre-trained model at [Pretrained Image Model](https://huggingface.co/Maureen123/Self-SSGI/blob/main/Self-SSGI_Pretrained%20Image%20Model.pkl)
   
 ## Multimodal data fusion
 - Run train.py to train the model, and the input data for this part requires that features from different modalities are unified to a dimension of 128. 
