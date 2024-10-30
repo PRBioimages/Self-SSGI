@@ -12,7 +12,6 @@ import random
 from scipy.io import savemat
 import scipy.io as sio
 from torch import nn
-from model import *
 from torch.nn.parameter import Parameter
 
 
