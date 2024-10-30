@@ -16,7 +16,6 @@ from torch.nn.parameter import Parameter
 
 
 
-
 class ExtendedCELLResNet50(nn.Module):
     def __init__(self, base_model, mlp_hidden_dim=128, out_dim=10):
         super().__init__()
