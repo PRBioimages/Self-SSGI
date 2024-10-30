@@ -1,4 +1,3 @@
-##用新预测的特征去训练多模态模型
 import copy
 import glob
 import os
@@ -103,9 +102,6 @@ class MyIterableDataset_test(IterableDataset):
         data = sio.loadmat(file_list)
         images = data['final_fea']
 
-
-
-        ##还是先要判断是验证集还是训练集
         keyword1 = "train"
         keyword2 = "valid"
         keyword3 = "test"
@@ -159,7 +155,7 @@ class MyIterableDataset_test(IterableDataset):
 
         for file in shuffled_files:
             images,seq, label,go,name = self.parse_file(file)
-            yield images,seq, label,go,name # 返回特征和标签
+            yield images,seq, label,go,name 
 
     def __len__(self):
         return len(self.file_list)
@@ -178,9 +174,7 @@ def main(i):
     dim_feedforward=512
     dropout=0.0
 
-    # 创建模型
     net = TransformerEncoder(num_layers,dim, num_heads, dim_feedforward, dropout,num_classes).to(device)
-    # 定义损失函数和优化器
     loss_func = nn.BCELoss()
     optimizer = torch.optim.Adam(net.parameters(), lr=LR)
     m1 = nn.Sigmoid()
@@ -219,8 +213,7 @@ def main(i):
             seq = torch.as_tensor(seq, dtype=torch.float32)
             combine_fea = torch.cat((images, seq), dim=1)
             go = torch.tensor(go, dtype=torch.float32)
-            #output,weight = net(go.to(device), combine_fea.to(device))  # ALL MODE
-            output, weight = net(go.to(device), seq.to(device))
+            output,weight = net(go.to(device), combine_fea.to(device))
             label = label.float()
             label = label.squeeze()
             loss = loss_func(m1(output).to(device), label.to(device))
@@ -232,14 +225,14 @@ def main(i):
 
         epoch_losses_train.append(epoch_loss_train)
 
-        ##保存模型
+  
         checkpoint = {
-            'net': net.state_dict(),  # 保存模型
-            'optimizer': optimizer.state_dict(),  # 保存优化器
-            'epoch': epoch  # 保存训练轮数
+            'net': net.state_dict(), 
+            'optimizer': optimizer.state_dict(), 
+            'epoch': epoch 
         }
 
-        ##训练完之后，在验证集上跑，计算loss
+
         net.eval()
         epoch_loss_valid = 0
         with torch.no_grad():
@@ -248,8 +241,7 @@ def main(i):
                 seq = torch.as_tensor(seq, dtype=torch.float32)
                 combine_fea = torch.cat((images, seq), dim=1)
                 go = torch.tensor(go, dtype=torch.float32)
-                #output,weight = net(go.to(device), combine_fea.to(device))
-                output, weight = net(go.to(device), seq.to(device))
+                output,weight = net(go.to(device), combine_fea.to(device))
                 label = label.float()
                 label = label.squeeze()
                 loss = loss_func(m1(output).to(device), label.to(device))
@@ -261,7 +253,6 @@ def main(i):
             print('Epoch {}, train_loss {:.4f}'.format(epoch, epoch_loss_train),
                   'valid_loss {:.4f} '.format(epoch_loss_valid))
 
-            ##使用最好的模型进行测试集
             if epoch_loss_valid <= min_loss_val:
                 min_loss_val = epoch_loss_valid
                 best_model = copy.deepcopy(net)
@@ -269,7 +260,7 @@ def main(i):
                 torch.save(checkpoint, pkl_path)
                 model_test = best_model
 
-    ##画图
+
     plt.subplot(2, 1, 1)
     plt.plot(Epoch, epoch_losses_train, 'o-')
     plt.title('Train Loss vs. Epoches')
@@ -280,21 +271,18 @@ def main(i):
     plt.ylabel('Valid Loss')
     plt.show()
 
-    ##然后是测试集
     model_test.eval()
     Name=[]
-    with torch.no_grad():#测试集一定要注意model_test.
+    with torch.no_grad():
         for step, test_data in enumerate(test_loader):
             images, seq, label ,go,name=test_data[:]
             images = torch.tensor(images, dtype=torch.float32)
             seq = torch.as_tensor(seq, dtype=torch.float32)
             combine_fea = torch.cat((images, seq), dim=1)
             go = torch.tensor(go, dtype=torch.float32)
-            #output,weight = model_test(go.to(device), combine_fea.to(device))
-            output, weight = net(go.to(device), seq.to(device))
+            output,weight = model_test(go.to(device), combine_fea.to(device))
             label = label.squeeze()
             mid_Y = m1(output)
-            #Name.append(name)
             Name.append([''.join(n) for n in name])
 
 
@@ -311,7 +299,7 @@ def main(i):
         print(test_probs_Y.shape)
         print(test_Y.shape)
 
-        # 保存为.mat,画混淆矩阵
+
         test_Y = np.asarray(test_Y.cpu().detach(), dtype=np.float32)
         test_probs_Y = np.asarray(test_probs_Y.cpu().detach(), dtype=np.float32)
         Weight = np.asarray(Weight.cpu().detach(), dtype=np.float32)
