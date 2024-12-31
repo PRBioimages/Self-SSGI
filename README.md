@@ -1,6 +1,9 @@
 # Self-SSGI
 Self-SSGI is a multimodal self-supervised learning model that integrates protein sequences, structures, GO annotations, and images to learn high-resolution protein representations.
 
+##Current Code Status
+Thank you for your interest in our work! At the moment, we have only released a portion of the code. The full code will be made available after the paper is officially accepted.
+
 ## Data Preprocessing
 
 ### 1. Protein Atom-Level Feature Extraction:
