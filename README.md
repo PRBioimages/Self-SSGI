@@ -31,7 +31,7 @@ Thank you for your interest in our work! At the moment, we have only released a 
 ## Self-supervised model for joint representation learning of protein sequence and structure based on mask training
 - Run train.py to train the model. You can download the pre-trained model at [Pretrained Sequence_Structure Model](https://huggingface.co/Maureen123/Self-SSGI/blob/main/Self-SSGI_Pretrained%20Sequence_Structure%20Model.pkl)
 ## Contrastive Image-GO Pre-training
-- Run load_model_and_get_fea.py to  load our pre-trained model and extract the features of the image. You can download the pre-trained model at [Pretrained Image Model](https://huggingface.co/Maureen123/Self-SSGI/blob/main/Self-SSGI_Pretrained%20Image%20Model.pkl)
+- Run load_model_and_get_fea.py to  load our pre-trained model and extract the features of the image. You can download the pre-trained model at [Pretrained Image Model](https://huggingface.co/Maureen123/Self-SSGI/blob/main/Self-SSGI_Pretrained_Image_Model.pkl)
   
 ## Multimodal data fusion
 - Run train.py to train the model, and the input data for this part requires that features from different modalities are unified to a dimension of 128.
