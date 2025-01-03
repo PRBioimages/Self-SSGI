@@ -208,9 +208,8 @@ def main(i):
         for images,seq ,label,go in tqdm(train_loader):
             images = torch.tensor(images, dtype=torch.float32)
             seq = torch.as_tensor(seq, dtype=torch.float32)
-            combine_fea = torch.cat((images, seq), dim=1)
             go = torch.tensor(go, dtype=torch.float32)
-            output,weight = net(go.to(device), combine_fea.to(device))
+            output, weight = net(go.to(device), seq.to(device),images.to(device))
             label = label.float()
             label = label.squeeze()
             loss = loss_func(m1(output).to(device), label.to(device))
@@ -236,16 +235,13 @@ def main(i):
             for images, seq, label ,go in tqdm(valid_loader):
                 images = torch.tensor(images, dtype=torch.float32)
                 seq = torch.as_tensor(seq, dtype=torch.float32)
-                combine_fea = torch.cat((images, seq), dim=1)
                 go = torch.tensor(go, dtype=torch.float32)
-                output,weight = net(go.to(device), combine_fea.to(device))
+                output, weight = net(go.to(device), seq.to(device),images.to(device))
                 label = label.float()
                 label = label.squeeze()
                 loss = loss_func(m1(output).to(device), label.to(device))
                 epoch_loss_valid += loss.detach().item()
 
-            # epoch_loss_valid /= (len(all_file_list_valid))/10000
-            # epoch_loss_valid /= 10000
             epoch_losses_valid.append(epoch_loss_valid)
             print('Epoch {}, train_loss {:.4f}'.format(epoch, epoch_loss_train),
                   'valid_loss {:.4f} '.format(epoch_loss_valid))
@@ -275,9 +271,8 @@ def main(i):
             images, seq, label ,go,name=test_data[:]
             images = torch.tensor(images, dtype=torch.float32)
             seq = torch.as_tensor(seq, dtype=torch.float32)
-            combine_fea = torch.cat((images, seq), dim=1)
             go = torch.tensor(go, dtype=torch.float32)
-            output,weight = model_test(go.to(device), combine_fea.to(device))
+            output, weight = net(go.to(device), seq.to(device),images.to(device))
             label = label.squeeze()
             mid_Y = m1(output)
             Name.append([''.join(n) for n in name])
