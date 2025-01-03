@@ -59,13 +59,16 @@ class TransformerEncoder(nn.Module):
         super(TransformerEncoder, self).__init__()
         self.layers = nn.ModuleList(
             [TransformerEncoderlayer(dim, num_heads, dim_feedforward, dropout) for _ in range(num_layers)])
+        self.fc1 = nn.Linear(512, 128)
+        self.fc2 = nn.Linear(512, 128)
         self.fc_out = nn.Linear(dim, num_classes)
 
-    def forward(self, src,memory):
+    def forward(self, go, seq,img):
+        go=self.fc1(go)
+        img = self.fc2(img)
+        memory=torch.cat((seq,img),dim=1)
         for layer in self.layers:
-            src, attn_weights = layer(src, memory)
-
-
+            src, attn_weights = layer(go, memory)
         src=torch.squeeze(src)
         x = self.fc_out(src)
         return x, attn_weights
